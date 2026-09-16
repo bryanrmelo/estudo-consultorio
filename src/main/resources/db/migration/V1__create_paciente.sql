@@ -1,8 +1,9 @@
 CREATE TABLE paciente (
-      id          BIGSERIAL PRIMARY KEY,
-      nome        VARCHAR(120) NOT NULL,
-      email       VARCHAR(150) NOT NULL UNIQUE,
-      telefone    VARCHAR(20),
+      id              BIGSERIAL PRIMARY KEY,
+      nome            VARCHAR(120) NOT NULL,
+      cpf             VARCHAR(11)  UNIQUE,
+      email           VARCHAR(150) NOT NULL UNIQUE,
+      telefone        VARCHAR(20),
       data_nascimento DATE NOT NULL,
-      criado_em   TIMESTAMP NOT NULL DEFAULT NOW()
+      criado_em       TIMESTAMP NOT NULL DEFAULT NOW()
 );
