@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -108,6 +109,13 @@ public class ApiExceptionHandler {
         log.debug("Corpo da requisição ilegível", e);
         return problem(HttpStatus.BAD_REQUEST, "Requisição malformada",
                 "O corpo da requisição está ausente ou em formato inválido");
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ProblemDetail handleMethodNotSupported(HttpRequestMethodNotSupportedException e) {
+        log.debug("Método indisponível", e);
+        return problem(HttpStatus.METHOD_NOT_ALLOWED, "Método indisponível",
+                "Esse método não está disponível para esse recurso");
     }
 
     @ExceptionHandler(Exception.class)
