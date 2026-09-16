@@ -12,9 +12,9 @@ public record DentistaResponse(
     public static DentistaResponse from(Dentista d) {
         return new DentistaResponse(
                 d.getId(),
+                d.getCro(),
                 d.getNome(),
-                d.getCro(),
-                d.getCro(),
+                d.getEspecialidade(),
                 d.isAtivo()
         );
     }
