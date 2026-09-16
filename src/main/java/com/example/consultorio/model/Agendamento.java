@@ -23,6 +23,10 @@ public class Agendamento {
     @JoinColumn(name = "dentista_id", nullable = false)
     private Dentista dentista;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "procedimento_id")
+    private Procedimento procedimento;
+
     @Column(nullable = false)
     private LocalDateTime inicio;
 
@@ -36,15 +40,19 @@ public class Agendamento {
     @Column(length = 500)
     private String observacao;
 
+    @Column(name = "motivo_cancelamento")
+    private String motivoCancelamento;
+
     @Generated(event = EventType.INSERT)
     @Column(name = "criado_em", nullable = false, insertable = false, updatable = false)
     private LocalDateTime criadoEm;
 
     protected Agendamento() {}
 
-    public Agendamento(Paciente paciente, Dentista dentista, LocalDateTime inicio, LocalDateTime fim, AgendamentoStatus status, String observacao) {
+    public Agendamento(Paciente paciente, Dentista dentista, Procedimento procedimento, LocalDateTime inicio, LocalDateTime fim, AgendamentoStatus status, String observacao) {
         this.paciente = paciente;
         this.dentista = dentista;
+        this.procedimento = procedimento;
         this.inicio = inicio;
         this.fim = fim;
         this.status = status;
@@ -61,6 +69,14 @@ public class Agendamento {
 
     public Dentista getDentista() {
         return dentista;
+    }
+
+    public Procedimento getProcedimento() {
+        return procedimento;
+    }
+
+    public void setProcedimento(Procedimento procedimento) {
+        this.procedimento = procedimento;
     }
 
     public LocalDateTime getInicio() {
@@ -93,6 +109,14 @@ public class Agendamento {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    public String getMotivoCancelamento() {
+        return motivoCancelamento;
+    }
+
+    public void setMotivoCancelamento(String motivoCancelamento) {
+        this.motivoCancelamento = motivoCancelamento;
     }
 
     public LocalDateTime getCriadoEm() {

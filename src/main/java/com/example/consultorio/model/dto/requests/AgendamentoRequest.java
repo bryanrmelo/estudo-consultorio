@@ -1,4 +1,4 @@
-package com.example.consultorio.model.dto;
+package com.example.consultorio.model.dto.requests;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -12,6 +12,8 @@ public record AgendamentoRequest(
 
         @NotNull(message = "ID do dentista é obrigatório")
         Long dentistaId,
+
+        Long procedimentoId,
 
         @NotNull(message = "Data ínicial é obrigatório")
         LocalDateTime inicio,

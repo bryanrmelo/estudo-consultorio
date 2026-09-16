@@ -1,11 +1,17 @@
 package com.example.consultorio.service;
 
 import com.example.consultorio.common.EmailJaCadastradoException;
+import com.example.consultorio.model.Dentista;
 import com.example.consultorio.model.Paciente;
-import com.example.consultorio.model.dto.PacienteRequest;
-import com.example.consultorio.model.dto.PacienteResponse;
+import com.example.consultorio.model.dto.requests.PacienteRequest;
+import com.example.consultorio.model.dto.responses.DentistaResponse;
+import com.example.consultorio.model.dto.responses.PacienteResponse;
 import com.example.consultorio.repository.PacienteRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,8 +42,12 @@ public class PacienteService {
     }
 
     @Transactional(readOnly = true)
-    public List<PacienteResponse> listar() {
-        return pacienteRepository.findAll().stream().map(PacienteResponse::from).toList();
+    public Page<PacienteResponse> listar(int pagina, int limite) {
+
+        // essa paginação utiliza LIMIT e OFFSET
+        Pageable pageable = PageRequest.of(pagina, limite, Sort.by(Sort.Direction.ASC, "id"));
+        Page<Paciente> page = pacienteRepository.findAll(pageable);
+        return page.map(PacienteResponse::from);
     }
 
     @Transactional(readOnly = true)

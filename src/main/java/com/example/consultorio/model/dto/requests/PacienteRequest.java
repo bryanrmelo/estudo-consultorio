@@ -1,4 +1,4 @@
-package com.example.consultorio.model.dto;
+package com.example.consultorio.model.dto.requests;
 
 import jakarta.validation.constraints.*;
 
