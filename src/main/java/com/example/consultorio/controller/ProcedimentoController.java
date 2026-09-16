@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/procedimentos")
@@ -23,7 +22,7 @@ public class ProcedimentoController {
     }
 
     @PostMapping
-    public ResponseEntity<ProcedimentoResponse> criar(@RequestBody @Valid ProcedimentoRequest request, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<ProcedimentoResponse> criar(@RequestBody @Valid ProcedimentoRequest request) {
         ProcedimentoResponse procedimentoResponse = procedimentoService.criar(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(procedimentoResponse);
     }

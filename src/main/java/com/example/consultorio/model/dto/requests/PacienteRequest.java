@@ -10,7 +10,7 @@ public record PacienteRequest(
         @Size(max = 120)
         String nome,
 
-        @Size(max = 11)
+        @Pattern(regexp = "\\d{11}")
         String cpf,
 
         @NotBlank(message = "Email é obrigatório")
