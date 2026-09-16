@@ -7,6 +7,7 @@ import java.time.LocalDate;
 public record PacienteResponse(
         Long id,
         String nome,
+        String cpf,
         String email,
         String telefone,
         LocalDate dataNascimento
@@ -15,10 +16,10 @@ public record PacienteResponse(
         return new PacienteResponse(
                 paciente.getId(),
                 paciente.getNome(),
+                paciente.getCpf(),
                 paciente.getEmail(),
                 paciente.getTelefone(),
                 paciente.getDataNascimento()
         );
     }
-
 }

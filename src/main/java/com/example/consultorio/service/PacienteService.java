@@ -1,11 +1,11 @@
 package com.example.consultorio.service;
 
-import com.example.consultorio.common.EmailJaCadastradoException;
-import com.example.consultorio.model.Dentista;
+import com.example.consultorio.common.exception.CpfJaCadastradoException;
+import com.example.consultorio.common.exception.EmailJaCadastradoException;
 import com.example.consultorio.model.Paciente;
 import com.example.consultorio.model.dto.requests.PacienteRequest;
-import com.example.consultorio.model.dto.responses.DentistaResponse;
 import com.example.consultorio.model.dto.responses.PacienteResponse;
+import com.example.consultorio.model.enums.PacienteSort;
 import com.example.consultorio.repository.PacienteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
@@ -14,8 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 public class PacienteService {
@@ -28,13 +26,25 @@ public class PacienteService {
 
     @Transactional
     public PacienteResponse criar(PacienteRequest pacienteRequest) {
-        if(pacienteRepository.existsByEmail(pacienteRequest.email())) {
+        if (pacienteRepository.existsByEmail(pacienteRequest.email())) {
             throw new EmailJaCadastradoException(
                     "Já existe paciente cadastrado com o email " + pacienteRequest.email()
             );
         }
 
-        Paciente paciente = new Paciente(pacienteRequest.nome(), pacienteRequest.email(), pacienteRequest.telefone(), pacienteRequest.dataNascimento());
+        if (pacienteRepository.existsByCpf(pacienteRequest.cpf())) {
+            throw new CpfJaCadastradoException(
+                    "Já existe paciente cadastrado com o CPF " + pacienteRequest.cpf()
+            );
+        }
+
+        Paciente paciente = new Paciente(
+                pacienteRequest.cpf(),
+                pacienteRequest.nome(),
+                pacienteRequest.email(),
+                pacienteRequest.telefone(),
+                pacienteRequest.dataNascimento()
+        );
 
         pacienteRepository.save(paciente);
 
@@ -42,10 +52,11 @@ public class PacienteService {
     }
 
     @Transactional(readOnly = true)
-    public Page<PacienteResponse> listar(int pagina, int limite) {
+    public Page<PacienteResponse> listar(int pagina, int limite, PacienteSort sortBy, Sort.Direction direcao) {
 
         // essa paginação utiliza LIMIT e OFFSET
-        Pageable pageable = PageRequest.of(pagina, limite, Sort.by(Sort.Direction.ASC, "id"));
+        Pageable pageable = PageRequest.of(pagina, limite,
+                Sort.by(direcao, sortBy.getProperty()).and(Sort.by(Sort.Direction.ASC, "id")));
         Page<Paciente> page = pacienteRepository.findAll(pageable);
         return page.map(PacienteResponse::from);
     }

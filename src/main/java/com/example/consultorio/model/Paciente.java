@@ -18,22 +18,27 @@ public class Paciente {
     @Column(nullable = false, length = 120)
     private String nome;
 
+    @Column(unique = true, nullable = false, length = 11)
+    private String cpf;
+
     @Column(nullable = false, unique = true, length = 150)
     private String email;
 
     @Column(length = 20)
     private String telefone;
 
-    @Column(name = "data_nascimento",nullable = false)
+    @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 
     @Generated(event = EventType.INSERT)
     @Column(name = "criado_em", nullable = false, insertable = false, updatable = false)
     private LocalDateTime criadoEm;
 
-    protected Paciente() {}
+    protected Paciente() {
+    }
 
-    public Paciente(String nome, String email, String telefone, LocalDate dataNascimento) {
+    public Paciente(String cpf, String nome, String email, String telefone, LocalDate dataNascimento) {
+        this.cpf = cpf;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
@@ -43,6 +48,14 @@ public class Paciente {
     // sem seter de id
     public Long getId() {
         return id;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getNome() {
