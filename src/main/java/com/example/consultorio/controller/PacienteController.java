@@ -1,5 +1,8 @@
-package com.example.consultorio.paciente;
+package com.example.consultorio.controller;
 
+import com.example.consultorio.model.dto.PacienteRequest;
+import com.example.consultorio.model.dto.PacienteResponse;
+import com.example.consultorio.service.PacienteService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

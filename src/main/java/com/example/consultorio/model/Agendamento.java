@@ -1,7 +1,6 @@
-package com.example.consultorio.agendamento;
+package com.example.consultorio.model;
 
-import com.example.consultorio.dentista.Dentista;
-import com.example.consultorio.paciente.Paciente;
+import com.example.consultorio.model.enums.AgendamentoStatus;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Generated;
 import org.hibernate.generator.EventType;

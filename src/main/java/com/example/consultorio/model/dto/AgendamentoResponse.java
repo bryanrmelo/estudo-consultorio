@@ -1,7 +1,9 @@
-package com.example.consultorio.agendamento;
+package com.example.consultorio.model.dto;
 
-import com.example.consultorio.dentista.Dentista;
-import com.example.consultorio.paciente.Paciente;
+import com.example.consultorio.model.enums.AgendamentoStatus;
+import com.example.consultorio.model.Dentista;
+import com.example.consultorio.model.Agendamento;
+import com.example.consultorio.model.Paciente;
 
 import java.time.LocalDateTime;
 

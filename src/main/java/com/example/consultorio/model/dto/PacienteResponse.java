@@ -1,4 +1,6 @@
-package com.example.consultorio.paciente;
+package com.example.consultorio.model.dto;
+
+import com.example.consultorio.model.Paciente;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

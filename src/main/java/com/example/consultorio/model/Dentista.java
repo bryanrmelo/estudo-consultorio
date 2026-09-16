@@ -1,4 +1,4 @@
-package com.example.consultorio.dentista;
+package com.example.consultorio.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.Generated;

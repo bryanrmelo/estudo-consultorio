@@ -1,4 +1,4 @@
-package com.example.consultorio.agendamento;
+package com.example.consultorio.model.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

@@ -1,6 +1,10 @@
-package com.example.consultorio.paciente;
+package com.example.consultorio.service;
 
 import com.example.consultorio.common.EmailJaCadastradoException;
+import com.example.consultorio.model.Paciente;
+import com.example.consultorio.model.dto.PacienteRequest;
+import com.example.consultorio.model.dto.PacienteResponse;
+import com.example.consultorio.repository.PacienteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
