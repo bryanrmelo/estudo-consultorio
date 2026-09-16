@@ -8,9 +8,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import java.net.URI;
 
 @RestController
 @RequestMapping("/dentistas")
@@ -23,18 +20,13 @@ public class DentistaController {
     }
 
     @PostMapping
-    public ResponseEntity<DentistaResponse> criar(@RequestBody @Valid DentistaRequest request, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<DentistaResponse> criar(@RequestBody @Valid DentistaRequest request) {
         DentistaResponse dentistaResponse = dentistaService.criar(request);
-
-        URI uri = uriBuilder.path("/dentistas/{id}")
-                .buildAndExpand(dentistaResponse.id())
-                .toUri();
-
         return ResponseEntity.status(HttpStatus.CREATED).body(dentistaResponse);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<DentistaResponse> atualizarStatus(@PathVariable Long id, @RequestBody @Valid AtualizarDentistaStatusRequest request, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<DentistaResponse> atualizarStatus(@PathVariable Long id, @RequestBody @Valid AtualizarDentistaStatusRequest request) {
         DentistaResponse dentistaResponse = dentistaService.atualizarStatus(id, request);
         return ResponseEntity.ok(dentistaResponse);
     }

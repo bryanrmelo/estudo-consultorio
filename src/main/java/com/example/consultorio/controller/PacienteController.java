@@ -6,6 +6,7 @@ import com.example.consultorio.model.enums.PacienteSort;
 import com.example.consultorio.service.PacienteService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -28,8 +29,8 @@ public class PacienteController {
 
     @GetMapping
     public ResponseEntity<Page<PacienteResponse>> listar(
-            @RequestParam(defaultValue = "1") int pagina,
-            @RequestParam(defaultValue = "20") @Max(100) int limite,
+            @RequestParam(defaultValue = "0") @Min(0) int pagina,
+            @RequestParam(defaultValue = "20") @Min(1) @Max(100) int limite,
             @RequestParam(defaultValue = "cpf") PacienteSort sortBy,
             @RequestParam(defaultValue = "ASC") Sort.Direction direcao) {
         Page<PacienteResponse> page = pacienteService.listar(pagina, limite, sortBy, direcao);
@@ -50,6 +51,6 @@ public class PacienteController {
                 .buildAndExpand(pacienteResponse.id())
                 .toUri();
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(pacienteResponse);
+        return ResponseEntity.created(uri).body(pacienteResponse);
     }
 }

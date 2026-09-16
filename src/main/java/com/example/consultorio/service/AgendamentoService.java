@@ -1,15 +1,15 @@
 package com.example.consultorio.service;
 
-import com.example.consultorio.model.dto.requests.AgendamentoRequest;
-import com.example.consultorio.model.enums.AgendamentoStatus;
-import com.example.consultorio.model.Dentista;
-import com.example.consultorio.model.Procedimento;
-import com.example.consultorio.repository.DentistaRepository;
 import com.example.consultorio.model.Agendamento;
-import com.example.consultorio.model.dto.responses.AgendamentoResponse;
+import com.example.consultorio.model.Dentista;
 import com.example.consultorio.model.Paciente;
-import com.example.consultorio.repository.PacienteRepository;
+import com.example.consultorio.model.Procedimento;
+import com.example.consultorio.model.dto.requests.AgendamentoRequest;
+import com.example.consultorio.model.dto.responses.AgendamentoResponse;
+import com.example.consultorio.model.enums.AgendamentoStatus;
 import com.example.consultorio.repository.AgendamentoRepository;
+import com.example.consultorio.repository.DentistaRepository;
+import com.example.consultorio.repository.PacienteRepository;
 import com.example.consultorio.repository.ProcedimentoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
