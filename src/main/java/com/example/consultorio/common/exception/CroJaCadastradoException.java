@@ -1,10 +1,7 @@
 package com.example.consultorio.common.exception;
 
-import org.springframework.http.HttpStatus;
-
-public class CroJaCadastradoException extends NegocioException {
+public class CroJaCadastradoException extends ConflitoException {
     public CroJaCadastradoException(String cro) {
-        super(HttpStatus.CONFLICT, "CRO já cadastrado",
-                "O CRO '%s' já está em uso".formatted(cro));
+        super("CRO já cadastrado", "O CRO '%s' já está em uso".formatted(cro));
     }
 }
