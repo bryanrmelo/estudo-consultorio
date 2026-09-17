@@ -18,7 +18,8 @@ public record AgendamentoResponse(
         String observacao,
         AgendamentoStatus status,
         String motivoCancelamento,
-        LocalDateTime criadoEm
+        LocalDateTime criadoEm,
+        String idempotencyKey
 ) {
     public static AgendamentoResponse from(Agendamento agendamento) {
         return new AgendamentoResponse(
@@ -31,7 +32,8 @@ public record AgendamentoResponse(
                 agendamento.getObservacao(),
                 agendamento.getStatus(),
                 agendamento.getMotivoCancelamento(),
-                agendamento.getCriadoEm()
+                agendamento.getCriadoEm(),
+                agendamento.getIdempotencyKey()
         );
     }
 

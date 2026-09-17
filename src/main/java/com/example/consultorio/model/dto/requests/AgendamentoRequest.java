@@ -13,13 +13,11 @@ public record AgendamentoRequest(
         @NotNull(message = "ID do dentista é obrigatório")
         Long dentistaId,
 
+        @NotNull(message = "ID do procedimento é obrigatório")
         Long procedimentoId,
 
         @NotNull(message = "Data ínicial é obrigatório")
         LocalDateTime inicio,
-
-        @NotNull(message = "Data final é obrigatório")
-        LocalDateTime fim,
 
         @Size(max = 500)
         String observacao

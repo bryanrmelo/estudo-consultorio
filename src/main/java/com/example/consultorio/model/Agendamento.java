@@ -47,6 +47,9 @@ public class Agendamento {
     @Column(name = "criado_em", nullable = false, insertable = false, updatable = false)
     private LocalDateTime criadoEm;
 
+    @Column(name = "idempotency_key", nullable = false)
+    private String idempotencyKey;
+
     protected Agendamento() {}
 
     public Agendamento(Paciente paciente, Dentista dentista, Procedimento procedimento, LocalDateTime inicio, LocalDateTime fim, AgendamentoStatus status, String observacao) {
@@ -122,4 +125,8 @@ public class Agendamento {
     public LocalDateTime getCriadoEm() {
         return criadoEm;
     }
+
+    public String getIdempotencyKey() { return idempotencyKey; }
+
+    public void setIdempotencyKey(String idempotencyKey) { this.idempotencyKey = idempotencyKey; }
 }

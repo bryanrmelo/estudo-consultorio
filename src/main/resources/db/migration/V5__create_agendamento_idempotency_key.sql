@@ -1,0 +1,1 @@
+ALTER TABLE agendamento ADD COLUMN idempotency_key VARCHAR(255);
