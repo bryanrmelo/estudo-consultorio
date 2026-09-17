@@ -1,0 +1,1 @@
+ALTER TABLE agendamento ADD CONSTRAINT uk_agendamento_idempotency_key UNIQUE (idempotency_key);

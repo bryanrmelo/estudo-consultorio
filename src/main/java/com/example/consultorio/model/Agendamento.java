@@ -47,7 +47,7 @@ public class Agendamento {
     @Column(name = "criado_em", nullable = false, insertable = false, updatable = false)
     private LocalDateTime criadoEm;
 
-    @Column(name = "idempotency_key", nullable = false)
+    @Column(name = "idempotency_key", nullable = false, unique = true)
     private String idempotencyKey;
 
     protected Agendamento() {}

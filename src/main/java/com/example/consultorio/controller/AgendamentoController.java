@@ -24,10 +24,10 @@ public class AgendamentoController {
     }
 
     @PostMapping
-    public ResponseEntity<AgendamentoResponse> criar(
+    public ResponseEntity<AgendamentoService.ResultadoCriacaoAgendamento> criar(
             @RequestBody @Valid AgendamentoRequest request,
             @RequestHeader("Idempotency-Key") String idempotencyKey) {
-        AgendamentoResponse response = agendamentoService.criar(request, idempotencyKey);
+        AgendamentoService.ResultadoCriacaoAgendamento response = agendamentoService.criar(request, idempotencyKey);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
