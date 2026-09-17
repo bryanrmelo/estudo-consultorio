@@ -59,7 +59,18 @@ public class PacienteService {
 
     @Transactional(readOnly = true)
     public PacienteResponse buscarPorId(Long id) {
-        return PacienteResponse.from(pacienteRepository.findById(id).orElseThrow(() -> new RecursoNaoEncontradoException("Paciente não encontrado")));
+        return PacienteResponse.from(pacienteRepository.findById(id).orElseThrow(() -> new RecursoNaoEncontradoException("Paciente")));
     }
 
+    @Transactional(readOnly = true)
+    public PacienteResponse buscarPorCpf(String cpf) {
+        return PacienteResponse.from(pacienteRepository.findByCpf(cpf).orElseThrow(() -> new RecursoNaoEncontradoException("Paciente")));
+    }
+
+    @Transactional(readOnly = true)
+    public Page<PacienteResponse> buscarPorNome(String nome, int pagina, int limite) {
+        Pageable pageable = PageRequest.of(pagina, limite, Sort.by(Sort.Direction.ASC, "nome"));
+        Page<Paciente> page = pacienteRepository.findByNomeContainingIgnoreCase(nome, pageable);
+        return page.map(PacienteResponse::from);
+    }
 }
