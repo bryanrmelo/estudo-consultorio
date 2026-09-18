@@ -18,7 +18,8 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long>,
     @Query("SELECT a FROM Agendamento a " +
             "WHERE a.dentista.id = :dentistaId " +
             "  AND a.inicio < :novoFim " +      // equivalente a existenteInicio.isBefore(novoFim)
-            "  AND a.fim > :novoInicio")        // equivalente a existenteFim.isAfter(novoInicio)
+            "  AND a.fim > :novoInicio" +
+            "  AND a.status <> 'CANCELADO'")
     List<Agendamento> findConflitosDeHorario(
             @Param("dentistaId") Long dentistaId,
             @Param("novoInicio") LocalDateTime novoInicio,

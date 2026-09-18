@@ -10,6 +10,7 @@ import org.springframework.http.ProblemDetail;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -96,6 +97,16 @@ public class ApiExceptionHandler {
         return problem(HttpStatus.BAD_REQUEST, "Parâmetro inválido",
                 "O parâmetro '%s' recebeu um valor inválido".formatted(e.getName()),
                 Map.of(e.getName(), mensagem));
+    }
+
+    @ExceptionHandler(MissingRequestHeaderException.class)
+    public ProblemDetail handleMissingRequestHeader(MissingRequestHeaderException e) {
+        ProblemDetail detail = problem(HttpStatus.BAD_REQUEST, "Parâmetro obrigatório ausente",
+                "O parâmetro '%s' é obrigatório".formatted(e.getHeaderName()));
+
+        detail.setProperty("missingHeader", e.getHeaderName());
+
+        return detail;
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)

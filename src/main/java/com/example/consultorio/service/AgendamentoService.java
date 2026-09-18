@@ -107,6 +107,7 @@ public class AgendamentoService {
             agendamentoRepository.save(agendamento);
             return new ResultadoCriacaoAgendamento(AgendamentoResponse.from(agendamento), true);
         } catch (DataIntegrityViolationException e) {
+            e.getMostSpecificCause().getMessage()
             throw new ConflitoException("Já existe um agendamento criado para essa Idempotency-Key.");
         }
     }
